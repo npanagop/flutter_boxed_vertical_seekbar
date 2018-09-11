@@ -27,6 +27,7 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
   double _min;
   double _max;
   double _step;
+  double _currentHeight;
 
   initState() {
     super.initState();
@@ -34,13 +35,30 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
     _min = widget.min ?? 0.0;
     _max = widget.max ?? 10.0;
     _step = widget.step ?? 1.0;
-
-    _value = 1.0;
+    _value = widget.value ?? 5.0;
+    _currentHeight = _convertValueToHeight();
   }
 
   double _convertValueToHeight() {
-    print ((_value - _min) * widget.height / (_max - _min));
     return (_value - _min) * widget.height / (_max - _min);
+  }
+
+  double _convertHeightToValue(double height) {
+    var tempValue = height * (_max - _min) / widget.height + _min;
+    if (tempValue != _max && tempValue != _min) {
+      tempValue = tempValue - (tempValue % _step) + (_min % _step);
+    }
+    return tempValue;
+  }
+
+  void _onTapUp(TapUpDetails tapDetails) {
+    RenderBox renderBox = context.findRenderObject();
+    setState(() {
+      _currentHeight =
+          widget.height - renderBox.globalToLocal(tapDetails.globalPosition).dy;
+      _value = _convertHeightToValue(_currentHeight);
+    });
+    print(_value);
   }
 
   Widget _buildFixedBox() {
@@ -56,24 +74,11 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
   Widget _buildMovingBox() {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: GestureDetector(
-        onVerticalDragUpdate: (d) {
-          //print (d.primaryDelta);
-          /*if (d.primaryDelta >= 1.0  ||  d.primaryDelta <= -1.0) {
-            var newValue = widget.value - d.primaryDelta;
-            if (newValue > widget.height) newValue = widget.height;
-            if (newValue < 0) newValue = 0.0;
-            setState(() {
-              _value = newValue;
-            });
-          }*/
-        },
-        child: SizedBox(
-          width: widget.width,
-          height: _convertValueToHeight(),
-          child: DecoratedBox(
-              decoration: BoxDecoration(color: Colors.red)
-          ),
+      child: SizedBox(
+        width: widget.width,
+        height: _currentHeight,
+        child: DecoratedBox(
+            decoration: BoxDecoration(color: Colors.red)
         ),
       ),
     );
@@ -81,12 +86,15 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.bottomCenter,
-      children: <Widget>[
-        _buildFixedBox(),
-        _buildMovingBox()
-      ],
+    return GestureDetector(
+      onTapUp: _onTapUp,
+      child: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
+        children: <Widget>[
+          _buildFixedBox(),
+          _buildMovingBox(),
+        ],
+      ),
     );
   }
 }
