@@ -9,6 +9,7 @@ class BoxedVerticalSeekbar extends StatefulWidget {
   final double max;
   final double step;
   final double value;
+
   const BoxedVerticalSeekbar({
     Key key,
     @required this.height,
@@ -61,6 +62,24 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
     print(_value);
   }
 
+  void _onVerticalDragUpdate(DragUpdateDetails dragDetails) {
+    if (dragDetails.primaryDelta >= 1.0  ||  dragDetails.primaryDelta <= -1.0) {
+      var newHeight = _currentHeight - dragDetails.primaryDelta;
+      if (newHeight > widget.height) {
+        newHeight = widget.height;
+      } else if (newHeight < 0) {
+        newHeight = 0.0;
+      }
+
+      if (newHeight != _currentHeight) {
+        setState(() {
+          _currentHeight = newHeight;
+          _value = _convertHeightToValue(_currentHeight);
+        });
+      }
+    }
+  }
+
   Widget _buildFixedBox() {
     return SizedBox(
       width: widget.width,
@@ -88,6 +107,7 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapUp: _onTapUp,
+      onVerticalDragUpdate: _onVerticalDragUpdate,
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: <Widget>[
