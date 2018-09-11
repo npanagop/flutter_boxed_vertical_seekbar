@@ -9,11 +9,13 @@ class BoxedVerticalSeekbar extends StatefulWidget {
   final double max;
   final double step;
   final double value;
+  final void Function(double) onValueChanged;
 
   const BoxedVerticalSeekbar({
     Key key,
     @required this.height,
     @required this.width,
+    this.onValueChanged,
     this.max,
     this.min,
     this.step,
@@ -36,6 +38,7 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
     _min = widget.min ?? 0.0;
     _max = widget.max ?? 10.0;
     _step = widget.step ?? 1.0;
+    //_setValue(widget.value ?? 5.0);
     _value = widget.value ?? 5.0;
     _currentHeight = _convertValueToHeight();
   }
@@ -57,9 +60,8 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
     setState(() {
       _currentHeight =
           widget.height - renderBox.globalToLocal(tapDetails.globalPosition).dy;
-      _value = _convertHeightToValue(_currentHeight);
+      _setValue(_convertHeightToValue(_currentHeight));
     });
-    print(_value);
   }
 
   void _onVerticalDragUpdate(DragUpdateDetails dragDetails) {
@@ -74,10 +76,15 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
       if (newHeight != _currentHeight) {
         setState(() {
           _currentHeight = newHeight;
-          _value = _convertHeightToValue(_currentHeight);
+          _setValue(_convertHeightToValue(_currentHeight));
         });
       }
     }
+  }
+
+  void _setValue(double newValue) {
+    _value = newValue;
+    widget.onValueChanged(_value);
   }
 
   Widget _buildFixedBox() {
