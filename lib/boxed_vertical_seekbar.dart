@@ -9,6 +9,7 @@ class BoxedVerticalSeekbar extends StatefulWidget {
   final double max;
   final double step;
   final double value;
+  final double accuracy;
   final void Function(double) onValueChanged;
 
   const BoxedVerticalSeekbar({
@@ -19,6 +20,7 @@ class BoxedVerticalSeekbar extends StatefulWidget {
     this.max,
     this.min,
     this.step,
+    this.accuracy,
     this.value,
   }) : super(key: key);
   
@@ -31,6 +33,7 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
   double _max;
   double _step;
   double _currentHeight;
+  double _accuracy;
 
   initState() {
     super.initState();
@@ -38,8 +41,8 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
     _min = widget.min ?? 0.0;
     _max = widget.max ?? 10.0;
     _step = widget.step ?? 1.0;
-    //_setValue(widget.value ?? 5.0);
     _value = widget.value ?? 5.0;
+    _accuracy = widget.accuracy ?? 0.0;
     _currentHeight = _convertValueToHeight();
   }
 
@@ -67,9 +70,9 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
   void _onVerticalDragUpdate(DragUpdateDetails dragDetails) {
     if (dragDetails.primaryDelta >= 1.0  ||  dragDetails.primaryDelta <= -1.0) {
       var newHeight = _currentHeight - dragDetails.primaryDelta;
-      if (newHeight > widget.height) {
+      if (newHeight > (widget.height - _accuracy)) {
         newHeight = widget.height;
-      } else if (newHeight < 0) {
+      } else if (newHeight < _accuracy) {
         newHeight = 0.0;
       }
 

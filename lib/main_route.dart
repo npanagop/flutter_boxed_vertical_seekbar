@@ -33,6 +33,7 @@ class _MainRouteState extends State<MainRoute> {
               height: 400.0,
               width: 150.0,
               onValueChanged: onValueChanged,
+              accuracy: 5.0,
             ),
             Text("Bottom"),
             Text(_value.toString()),
