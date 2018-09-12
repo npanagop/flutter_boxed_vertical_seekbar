@@ -10,6 +10,8 @@ class BoxedVerticalSeekbar extends StatefulWidget {
   final double step;
   final double value;
   final double accuracy;
+  final Widget fixedBox;
+  final Widget movingBox;
   final void Function(double) onValueChanged;
 
   const BoxedVerticalSeekbar({
@@ -22,18 +24,22 @@ class BoxedVerticalSeekbar extends StatefulWidget {
     this.step,
     this.accuracy,
     this.value,
+    this.fixedBox,
+    this.movingBox,
   }) : super(key: key);
   
   _BoxedVerticalSeekbarState createState() => _BoxedVerticalSeekbarState();
 }
 
-class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
+class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar>{
   double _value;
   double _min;
   double _max;
   double _step;
   double _currentHeight;
   double _accuracy;
+  Widget _movingDecoratedBox;
+  Widget _fixedDecoratedBox;
 
   initState() {
     super.initState();
@@ -44,6 +50,12 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
     _value = widget.value ?? 5.0;
     _accuracy = widget.accuracy ?? 0.0;
     _currentHeight = _convertValueToHeight();
+    _movingDecoratedBox = widget.movingBox ?? DecoratedBox(
+        decoration: BoxDecoration(color: Colors.red)
+    );
+    _fixedDecoratedBox = widget.fixedBox ?? DecoratedBox(
+      decoration: BoxDecoration(color: Colors.grey),
+    );
   }
 
   double _convertValueToHeight() {
@@ -94,9 +106,7 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
     return SizedBox(
       width: widget.width,
       height: widget.height,
-      child: DecoratedBox(
-        decoration: BoxDecoration(color: Colors.black54),
-      ),
+      child: _fixedDecoratedBox,
     );
   }
 
@@ -106,9 +116,7 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar> {
       child: SizedBox(
         width: widget.width,
         height: _currentHeight,
-        child: DecoratedBox(
-            decoration: BoxDecoration(color: Colors.red)
-        ),
+        child: _movingDecoratedBox,
       ),
     );
   }
