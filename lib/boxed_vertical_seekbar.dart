@@ -2,17 +2,45 @@ library boxed_vertical_seekbar;
 
 import 'package:flutter/material.dart';
 
+/// A vertical SeekBar build on two [SizedBox] with versatile appearance.
 class BoxedVerticalSeekbar extends StatefulWidget {
-  //The width and height of the seekbar.
+  /// The width of the SeekBar. @required
   final double width;
+  /// The height of the SeekBar. @required
   final double height;
+  /// The minimum value of the SeekBar.
+  ///
+  /// Defaults to 0.0 .
   final double min;
+  /// The maximum value of the SeekBar.
+  ///
+  /// Defaults to 10.0 .
   final double max;
+  /// The step by which the SeekBar's value is incremented.
+  ///
+  /// Defaults to 1.0 .
   final double step;
+  /// The initial value of the SeekBar.
+  ///
+  /// Defaults to [max] - [step].
   final double value;
+  /// The sensitivity of the SeekBar's edges in pixels.
+  ///
+  /// A value of 5.0 means that when the SeekBar is less than 5 pixels away
+  /// from the top or bottom, it will snap to it. Defaults to 0.0 .
   final double accuracy;
+  /// The child [Widget] of the fixed [SizedBox].
+  ///
+  /// Use this to change the appearance of the SeekBar. Defaults to a
+  /// [DecoratedBox] with a grey [BoxDecoration].
   final Widget fixedBox;
+  /// The child [Widget] of the moving [SizedBox].
+  ///
+  /// Use this to change the appearance of the SeekBar. Defaults to a
+  /// [DecoratedBox] with a red [BoxDecoration].
   final Widget movingBox;
+  /// The function called when the value of the SeekBar changes.
+  /// Passes the new value as a parameter.
   final void Function(double) onValueChanged;
 
   const BoxedVerticalSeekbar({
@@ -44,7 +72,7 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar>{
 
   initState() {
     super.initState();
-
+    // Initialise all values.
     _min = widget.min ?? 0.0;
     _max = widget.max ?? 10.0;
     _step = widget.step ?? 1.0;
@@ -59,10 +87,12 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar>{
     );
   }
 
+  // Converts the current value to its respective height.
   double _convertValueToHeight() {
     return (_value - _min) * widget.height / (_max - _min);
   }
 
+  // Converts SizedBox height to its respective value.
   double _convertHeightToValue(double height) {
     var tempValue = height * (_max - _min) / widget.height + _min;
     if (tempValue != _max && tempValue != _min) {
@@ -71,6 +101,7 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar>{
     return tempValue;
   }
 
+  // Updates height and value when user taps on the SeekBar.
   void _onTapUp(TapUpDetails tapDetails) {
     RenderBox renderBox = context.findRenderObject();
     setState(() {
@@ -80,6 +111,7 @@ class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar>{
     });
   }
 
+  // Updates height and value when user drags the SeekBar.
   void _onVerticalDragUpdate(DragUpdateDetails dragDetails) {
     if (dragDetails.primaryDelta >= 1.0  ||  dragDetails.primaryDelta <= -1.0) {
       var newHeight = _currentHeight - dragDetails.primaryDelta;
