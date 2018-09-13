@@ -2,7 +2,7 @@ library boxed_vertical_seekbar;
 
 import 'package:flutter/material.dart';
 
-import 'boxed_vertical_seekbar.dart';
+import 'package:boxed_vertical_seekbar/boxed_vertical_seekbar.dart';
 
 class MainRoute extends StatefulWidget {
   const MainRoute();
@@ -27,16 +27,21 @@ class _MainRouteState extends State<MainRoute> {
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Top"),
             BoxedVerticalSeekbar(
               height: 400.0,
               width: 150.0,
               onValueChanged: onValueChanged,
               accuracy: 5.0,
             ),
-            Text("Bottom"),
-            Text(_value.toString()),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                _value.toString(),
+                style: TextStyle(fontSize: 32.0),
+              ),
+            ),
           ],
         )
     );

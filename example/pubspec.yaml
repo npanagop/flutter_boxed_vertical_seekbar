@@ -1,0 +1,16 @@
+name: example
+description: Example of BoxedVerticalSeekbar package.
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  boxed_vertical_seekbar:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

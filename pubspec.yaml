@@ -1,8 +1,8 @@
 name: boxed_vertical_seekbar
 description: A new Flutter package.
 version: 0.0.1
-author:
-homepage:
+author: Nick Panagopoulos
+homepage: https://github.com/npanagop/flutter_boxed_vertical_seekbar
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"

@@ -3,6 +3,7 @@ library boxed_vertical_seekbar;
 import 'package:flutter/material.dart';
 
 class BoxedVerticalSeekbar extends StatefulWidget {
+  //The width and height of the seekbar.
   final double width;
   final double height;
   final double min;
