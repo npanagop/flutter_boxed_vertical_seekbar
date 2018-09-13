@@ -3,7 +3,7 @@ library boxed_vertical_seekbar;
 import 'package:flutter/material.dart';
 
 /// A vertical SeekBar build on two [SizedBox] with versatile appearance.
-class BoxedVerticalSeekbar extends StatefulWidget {
+class BoxedVerticalSeekBar extends StatefulWidget {
   /// The width of the SeekBar. @required
   final double width;
   /// The height of the SeekBar. @required
@@ -43,7 +43,7 @@ class BoxedVerticalSeekbar extends StatefulWidget {
   /// Passes the new value as a parameter.
   final void Function(double) onValueChanged;
 
-  const BoxedVerticalSeekbar({
+  const BoxedVerticalSeekBar({
     Key key,
     @required this.height,
     @required this.width,
@@ -57,10 +57,10 @@ class BoxedVerticalSeekbar extends StatefulWidget {
     this.movingBox,
   }) : super(key: key);
   
-  _BoxedVerticalSeekbarState createState() => _BoxedVerticalSeekbarState();
+  _BoxedVerticalSeekBarState createState() => _BoxedVerticalSeekBarState();
 }
 
-class _BoxedVerticalSeekbarState extends State<BoxedVerticalSeekbar>{
+class _BoxedVerticalSeekBarState extends State<BoxedVerticalSeekBar>{
   double _value;
   double _min;
   double _max;

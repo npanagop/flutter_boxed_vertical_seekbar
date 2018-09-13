@@ -29,7 +29,7 @@ class _MainRouteState extends State<MainRoute> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            BoxedVerticalSeekbar(
+            BoxedVerticalSeekBar(
               height: 400.0,
               width: 150.0,
               onValueChanged: onValueChanged,
