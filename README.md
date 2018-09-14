@@ -1,9 +1,36 @@
 # boxed_vertical_seekbar
 
-A new Flutter package.
+A vertical SeekBar build on two [SizedBox] with versatile appearance.
+
+Inspired by the [BoxedVerticalSeekBar](https://github.com/alpbak/BoxedVerticalSeekBar) Android
+library by [@alpbak](https://github.com/alpbak).
+
+## Usage
+
+Import into your project.
+
+pubspec.yaml:
+```
+dependencies:
+  ..
+  boxed_vertical_seekbar: ^1.0.0
+```
+
+Use the widget in your project. Height and width parameters are required.
+
+Example:
+```dart
+BoxedVerticalSeekbar(
+  height: 400.0,
+  width: 150.0,
+  onValueChanged: (newValue) => print(newValue),
+)
+```
+
+To learn more about the available parameters visit the
+[docs].
+
 
 ## Getting Started
 
 For help getting started with Flutter, view our online [documentation](https://flutter.io/).
-
-For help on editing package code, view the [documentation](https://flutter.io/developing-packages/).
