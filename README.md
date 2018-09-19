@@ -1,6 +1,6 @@
 # boxed_vertical_seekbar
 
-A vertical SeekBar build on two [SizedBox] with versatile appearance.
+A vertical SeekBar build with two [SizedBox] with versatile appearance.
 
 Inspired by the [BoxedVerticalSeekBar](https://github.com/alpbak/BoxedVerticalSeekBar) Android
 library by [@alpbak](https://github.com/alpbak).
@@ -12,7 +12,7 @@ Import into your project.
 pubspec.yaml:
 ```
 dependencies:
-  ..
+  ...
   boxed_vertical_seekbar: ^1.0.0
 ```
 
@@ -30,6 +30,7 @@ BoxedVerticalSeekbar(
 To learn more about the available parameters visit the
 [docs].
 
+Default appearance of the SeekBar is a red active bar over a grey inactive bar.
 
 ## Getting Started
 
