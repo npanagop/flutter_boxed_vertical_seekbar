@@ -1,6 +1,6 @@
 # boxed_vertical_seekbar
 
-A vertical SeekBar build with two [SizedBox] with versatile appearance.
+A vertical SeekBar build with two [SizedBox](https://docs.flutter.io/flutter/widgets/SizedBox-class.html) with versatile appearance.
 
 Inspired by the [BoxedVerticalSeekBar](https://github.com/alpbak/BoxedVerticalSeekBar) Android
 library by [@alpbak](https://github.com/alpbak).
@@ -28,7 +28,7 @@ BoxedVerticalSeekbar(
 ```
 
 To learn more about the available parameters visit the
-[docs].
+[docs](https://pub.dartlang.org/documentation/boxed_vertical_seekbar/latest/boxed_vertical_seekbar/BoxedVerticalSeekBar-class.html).
 
 Default appearance of the SeekBar is a red active bar over a grey inactive bar.
 
