@@ -5,6 +5,9 @@ A vertical SeekBar build with two [SizedBox](https://docs.flutter.io/flutter/wid
 Inspired by the [BoxedVerticalSeekBar](https://github.com/alpbak/BoxedVerticalSeekBar) Android
 library by [@alpbak](https://github.com/alpbak).
 
+## Preview
+<img src="https://raw.githubusercontent.com/npanagop/flutter_boxed_vertical_seekbar/master/images/preview.gif" width="350"/>
+
 ## Usage
 
 Import into your project.
